@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#3b82f6" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Student Dashboard</title>
+</head>
+<body data-page="dashboard">
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">ICT Learning Platform</div>
+      <button id="logoutBtn" class="ghost">Logout</button>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card">
+      <h1 id="welcome">Welcome</h1>
+      <p>Your learning dashboard</p>
+      <div id="paymentStatus"></div>
+      <div id="renewalNotice" class="notice" style="display:none; margin-top:.8rem;">
+        Your premium access has expired. Please renew your monthly subscription to unlock premium lessons.
+      </div>
+    </section>
+
+    <section class="grid grid-2">
+      <article class="card lesson-card">
+        <h3>Free Activities</h3>
+        <p>Practice quizzes and revision notes for your grade.</p>
+        <a id="freeLink" class="btn" href="#">Open Free Activities</a>
+      </article>
+      <article class="card lesson-card locked">
+        <h3>Premium Activities</h3>
+        <p>Advanced projects, guided lessons, and exam prep tasks.</p>
+        <a id="premiumLink" class="btn secondary" href="#">Open Premium Activities</a>
+      </article>
+    </section>
+
+    <section class="grid grid-2">
+      <article class="card">
+        <h3>Progress Tracker</h3>
+        <p id="progressText">0% completed</p>
+        <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+      </article>
+      <article class="card">
+        <h3>Leaderboard (Coming Soon)</h3>
+        <p>1. Student A - 940 pts</p>
+        <p>2. Student B - 900 pts</p>
+        <p>3. You - 875 pts</p>
+      </article>
+    </section>
+  </main>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

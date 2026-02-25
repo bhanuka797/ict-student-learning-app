@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#3b82f6" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Admin Panel</title>
+</head>
+<body data-page="admin">
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">ICT Learning Platform • Admin</div>
+      <button id="logoutBtn" class="ghost">Logout</button>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card">
+      <h1>Student Access Management</h1>
+      <p>Update payment status and access dates for monthly premium lessons.</p>
+      <div id="message"></div>
+      <label for="statusFilter">Filter Students</label>
+      <select id="statusFilter">
+        <option value="all">All Students</option>
+        <option value="active">Active (Not Expired)</option>
+        <option value="expired">Expired</option>
+      </select>
+    </section>
+
+    <section class="card table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Grade</th>
+            <th>Phone</th>
+            <th>Payment</th>
+            <th>Access Start</th>
+            <th>Access End</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="studentsTableBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
