@@ -1,24 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#3b82f6" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/styles.css" />
   <title>ICT Learning Platform - Login</title>
 </head>
-<body data-page="login">
+
+<body>
+
   <header class="topbar">
-    <div class="container"><div class="brand">ICT Learning Platform</div></div>
+    <div class="container">
+      <div class="brand">ICT Learning Platform</div>
+    </div>
   </header>
 
   <main class="auth-wrapper">
     <section class="card auth-card">
-      <h1>Sign in</h1>
-      <p>Grade 6–13 lessons, activities, and progress in one app.</p>
-      <div id="message"></div>
+
+      <h1>Sign In</h1>
+      <p>Access lessons, activities, and progress tracking.</p>
+
+      <div id="message" style="margin-bottom:10px;"></div>
+
       <form id="loginForm">
+
         <label for="role">Login As</label>
         <select id="role" name="role">
           <option value="student">Student</option>
@@ -27,22 +35,78 @@
 
         <div id="studentIdWrap">
           <label for="studentId">Student ID</label>
-          <input type="text" id="studentId" name="studentId" placeholder="e.g., STU-2024-001" required />
+          <input type="text" id="studentId" placeholder="e.g. S001" />
         </div>
 
         <div id="emailWrap" style="display:none;">
-          <label for="email">Admin Email</label>
-          <input type="email" id="email" name="email" placeholder="teacher@school.edu" />
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="admin@email.com" />
         </div>
 
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="••••••••" required />
+        <input type="password" id="password" placeholder="Enter password" required />
 
-        <button type="submit">Continue</button>
+        <button type="submit">Login</button>
+
       </form>
+
     </section>
   </main>
 
-  <script type="module" src="/js/main.js"></script>
+  <script type="module">
+    import { loginStudent } from "./js/auth.js";
+
+    const roleSelect = document.getElementById("role");
+    const studentWrap = document.getElementById("studentIdWrap");
+    const emailWrap = document.getElementById("emailWrap");
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+
+    // Toggle student/admin fields
+    roleSelect.addEventListener("change", () => {
+      if (roleSelect.value === "student") {
+        studentWrap.style.display = "block";
+        emailWrap.style.display = "none";
+      } else {
+        studentWrap.style.display = "none";
+        emailWrap.style.display = "block";
+      }
+    });
+
+    // Login submit
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      message.innerText = "";
+
+      const role = roleSelect.value;
+      const password = document.getElementById("password").value.trim();
+
+      try {
+
+        if (role === "student") {
+
+          const studentID = document.getElementById("studentId").value.trim();
+
+          if (!studentID) {
+            throw new Error("Please enter Student ID");
+          }
+
+          const student = await loginStudent(studentID, password);
+
+          localStorage.setItem("student", JSON.stringify(student));
+          window.location.href = "dashboard.html";
+
+        } else {
+          throw new Error("Admin login not configured yet.");
+        }
+
+      } catch (error) {
+        message.style.color = "red";
+        message.innerText = error.message;
+      }
+    });
+
+  </script>
+
 </body>
 </html>
