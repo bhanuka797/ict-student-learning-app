@@ -4,12 +4,12 @@ import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.12.2/firebas
 
 // Replace with your Firebase project config
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT.appspot.com',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID'
+  apiKey: "AIza....",
+  authDomain: "ict-student-learning-app.firebaseapp.com",
+  projectId: "ict-student-learning-app",
+  storageBucket: "ict-student-learning-app.appspot.com",
+  messagingSenderId: "3307....",
+  appId: "1:3307...."
 };
 
 const app = initializeApp(firebaseConfig);
