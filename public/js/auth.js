@@ -1,33 +1,24 @@
-import { auth, db } from './firebase-config.js';
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { db } from './firebase-config.js';
 import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-export async function loginWithRole({ role, studentId, email, password }) {
-  const loginEmail = role === 'student' ? `${studentId}@ictlearning.local` : email;
-  const cred = await signInWithEmailAndPassword(auth, loginEmail, password);
-  const profileRef = doc(db, role === 'student' ? 'students' : 'admins', cred.user.uid);
-  const profileSnap = await getDoc(profileRef);
+export async function loginStudent(studentID, password) {
+    try {
+        const studentRef = doc(db, 'students', studentID);
+        const studentSnap = await getDoc(studentRef);
 
-  if (!profileSnap.exists()) {
-    throw new Error('Profile not found. Please contact administrator.');
-  }
+        if (!studentSnap.exists()) {
+            throw new Error("Student not found");
+        }
 
-  const profile = profileSnap.data();
-  if (role === 'admin' && profile.role !== 'teacher') {
-    throw new Error('Unauthorized admin account.');
-  }
+        const studentData = studentSnap.data();
 
-  return { user: cred.user, profile };
-}
+        if (studentData.password !== password) {
+            throw new Error("Wrong password");
+        }
 
-export function observeAuth(callback) {
-  return onAuthStateChanged(auth, callback);
-}
+        return studentData;
 
-export async function logout() {
-  await signOut(auth);
+    } catch (error) {
+        throw error;
+    }
 }
