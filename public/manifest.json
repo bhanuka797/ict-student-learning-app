@@ -1,0 +1,21 @@
+{
+  "name": "ICT Learning Platform",
+  "short_name": "ICT Learn",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f4f7ff",
+  "theme_color": "#3b82f6",
+  "description": "Grade 6-13 ICT learning platform with free and premium activities.",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192.png?text=ICT",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512.png?text=ICT",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
